@@ -6,7 +6,6 @@ export const useCartStore = create((set) => ({
   addToCart: (product) =>
     set((state) => {
       const exists = state.cart.find((item) => item.id === product.id);
-
       if (exists) {
         return {
           cart: state.cart.map((item) =>
@@ -14,7 +13,6 @@ export const useCartStore = create((set) => ({
           ),
         };
       }
-
       return { cart: [...state.cart, { ...product, qty: 1 }] };
     }),
 
@@ -29,9 +27,7 @@ export const useCartStore = create((set) => ({
     set((state) => ({
       cart: state.cart
         .map((item) =>
-          item.id === id
-            ? { ...item, qty: Math.max(1, item.qty - 1) }
-            : item
+          item.id === id ? { ...item, qty: Math.max(1, item.qty - 1) } : item
         )
         .filter((item) => item.qty > 0),
     })),
@@ -40,4 +36,6 @@ export const useCartStore = create((set) => ({
     set((state) => ({
       cart: state.cart.filter((item) => item.id !== id),
     })),
+
+  clearCart: () => set({ cart: [] }),
 }));

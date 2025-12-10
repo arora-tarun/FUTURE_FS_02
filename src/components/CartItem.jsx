@@ -1,41 +1,25 @@
-import { useCartStore } from "../store/cartStore.js";
+import { useCartStore } from "../store/cartStore";
 
-const CartItem = ({ item }) => {
-  const { increaseQty, decreaseQty, removeFromCart } = useCartStore();
+export default function CartItem({ item }) {
+  const removeFromCart = useCartStore((s) => s.removeFromCart);
 
   return (
-    <div className="flex justify-between items-center border p-3 rounded mb-3">
-      <div>
-        <h2 className="font-semibold">{item.name}</h2>
-        <p>₹{item.price}</p>
+    <div className="flex gap-4 items-center bg-white rounded-lg shadow-sm p-4">
+      <img
+        src={item.image}
+        alt={item.title}
+        className="w-20 h-20 object-cover rounded"
+      />
+      <div className="flex-1">
+        <h3 className="font-semibold text-slate-800">{item.title}</h3>
+        <p className="text-blue-600 font-semibold">₹{item.price}</p>
       </div>
-
-      <div className="flex items-center gap-2">
-        <button
-          className="px-2 bg-gray-300 rounded"
-          onClick={() => decreaseQty(item.id)}
-        >
-          -
-        </button>
-
-        <span>{item.qty}</span>
-
-        <button
-          className="px-2 bg-gray-300 rounded"
-          onClick={() => increaseQty(item.id)}
-        >
-          +
-        </button>
-      </div>
-
       <button
-        className="text-red-600"
         onClick={() => removeFromCart(item.id)}
+        className="px-3 py-1 text-sm rounded-md border border-red-300 text-red-600 hover:bg-red-50"
       >
         Remove
       </button>
     </div>
   );
-};
-
-export default CartItem;
+}

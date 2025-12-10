@@ -1,27 +1,26 @@
-import { useCartStore } from "../store/cartStore.js";
+import { Link } from "react-router-dom";
 
-const ProductCard = ({ product }) => {
-  const addToCart = useCartStore((state) => state.addToCart);
-
+export default function ProductCard({ product }) {
   return (
-    <div className="border rounded-lg shadow p-4 flex flex-col">
+    <div className="border rounded-lg shadow-sm hover:shadow-xl transition p-4 bg-white">
       <img
         src={product.image}
-        alt={product.name}
-        className="h-40 object-cover rounded"
+        alt={product.title}
+        className="w-full h-48 object-cover rounded-md"
       />
 
-      <h2 className="text-lg font-semibold mt-3">{product.name}</h2>
-      <p className="text-gray-600">₹{product.price}</p>
+      <h3 className="mt-4 font-semibold text-lg line-clamp-1">
+        {product.title}
+      </h3>
 
-      <button
-        className="mt-auto bg-blue-600 text-white py-2 rounded hover:bg-blue-700"
-        onClick={() => addToCart(product)}
+      <p className="text-indigo-600 font-bold mt-2">₹{product.price}</p>
+
+      <Link
+        to={`/product/${product.id}`}
+        className="mt-4 block bg-indigo-600 text-white text-center py-2 rounded-md hover:bg-indigo-700 transition"
       >
-        Add to Cart
-      </button>
+        View Details
+      </Link>
     </div>
   );
-};
-
-export default ProductCard;
+}
