@@ -15,6 +15,7 @@ export default function ProductDetails() {
     );
   }
   
+
   if (error || !product) {
     return (
       <div className="max-w-4xl mx-auto px-4 py-16 text-center">
