@@ -23,4 +23,3 @@ export default function CartItem({ item }) {
     </div>
   );
 }
-

@@ -14,7 +14,6 @@ export default function ProductDetails() {
       </div>
     );
   }
-  
 
   if (error || !product) {
     return (
